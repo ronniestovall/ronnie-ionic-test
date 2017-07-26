@@ -1,0 +1,29 @@
+<!--
+  Generated template for the ProjectsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title> My projects</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-card *ngFor="let project of projects"(click)="test(project)">
+  <img src="img/glaaultc.jpg"/>
+  <ion-card-content>
+    <ion-card-title>
+      {{project}}
+    </ion-card-title>
+      <img [src]="impossible puppy1.jpg" alt="impossible puppy 1">
+    <p>
+      We taugh here at claim academy.
+    </p>
+  </ion-card-content>
+</ion-card>
+</ion-content>
