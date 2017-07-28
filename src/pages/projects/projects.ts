@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 /**
  * Generated class for the ProjectsPage page.
@@ -10,33 +12,38 @@ import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
   selector: 'page-projects',
-  templateUrl: 'projects.html',
+  templateUrl: 'projects.html'
 })
 export class ProjectsPage {
-  projects:any=[
+  newProject:any = {};
+  projects:any = [];
 
-{
-  name:'Claim Academy', 
-  description:'We taugh here',
- image:'http://cdn2-www.dogtime.com/assets/uploads/gallery/30-impossibly-cute-puppies/impossibly-cute-puppy-8.jpg'
-},
-{
-  name:'Decsphere',
-description: 'Business Card Scanning',
-image:'http://cdn3-www.dogtime.com/assets/uploads/gallery/30-impossibly-cute-puppies/impossibly-cute-puppy-21.jpg'
-},
-
-{
-  name:'java jquery',
-  description: 'Learn Jquery',
-image:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLWQbteZGjVbU9BwN9k0s9dhTgBCROrjMd2zAfJGC-1ovvuo8Wsw'
-}
-  ];
-
-  constructor(public navCtrl: NavController,public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private storage: Storage
+    private db: AngularFireDatabase
+  ) {
+    //ON LOAD
+    storage.get('projects').then((data) => {
+      this.projects=data;
+      if(!this.projects) {
+        this.projects = [];
+      }
+    });
   }
 
- test(project){
-  console.log(project);
- }
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ProjectsPage');
+  }
+  
+  test(project){
+    console.log(project);
+    project.name = 'Hello There';
+  }
+  
+  addProject() {
+    this.projects.push(this.newProject);
+    this.storage.set('projects', this.projects);
+  }
 }

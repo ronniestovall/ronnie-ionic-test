@@ -14,16 +14,38 @@
 
 
 <ion-content padding>
-<ion-card *ngFor="let project of projects"(click)="test(project)">
-  <img src="img/glaaultc.jpg"/>
-  <ion-card-content>
-    <ion-card-title>
-      {{project}}
-    </ion-card-title>
-      <img [src]="impossible puppy1.jpg" alt="impossible puppy 1">
-    <p>
-      We taugh here at claim academy.
-    </p>
-  </ion-card-content>
-</ion-card>
+  <ion-card *ngFor="let project of projects" (click)="test(project)">
+    <img src="img/glaaultc.jpg" />
+    <ion-card-content>
+      <ion-card-title>
+        {{project.name}}
+      </ion-card-title>
+      <img [src]="project.image" alt="impossible puppy 1">
+      <p>
+        {{project.description}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+  <ion-list>
+
+    <ion-item>
+      <ion-label fixed> name</ion-label>
+      <ion-input type="text" name="name" [(ngModel)]="newProject.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label fixed> project description</ion-label>
+      <ion-input type="text" name="des" [(ngModel)]="newProject.description"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label fixed> project image
+      </ion-label>
+      <ion-input type="text" name="image" [(ngModel)]="newProject.image"></ion-input>
+    </ion-item>
+
+  </ion-list>
+  <button ion-button block (click)="addProject()">add Project</button>
+  </ion-card>
 </ion-content>
