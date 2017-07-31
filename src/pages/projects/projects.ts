@@ -16,21 +16,15 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 })
 export class ProjectsPage {
   newProject:any = {};
-  projects:any = [];
+  projects: FirebaseListObservable<any[]>;
 
-  constructor(
+ constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private storage: Storage
     private db: AngularFireDatabase
   ) {
     //ON LOAD
-    storage.get('projects').then((data) => {
-      this.projects=data;
-      if(!this.projects) {
-        this.projects = [];
-      }
-    });
+    this.projects = db.list('/projects');
   }
 
   ionViewDidLoad() {
@@ -44,6 +38,8 @@ export class ProjectsPage {
   
   addProject() {
     this.projects.push(this.newProject);
-    this.storage.set('projects', this.projects);
+    this.newProject.name='';
+    this.newProject.description='';
+    this.newProject.image='';
   }
 }
